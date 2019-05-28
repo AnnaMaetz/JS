@@ -1,0 +1,7 @@
+const diff = (a, b) => {
+  let result = Math.abs(a - b);
+  if (result > 180) {
+    result = 360 - result;
+  }
+  return result;
+};
