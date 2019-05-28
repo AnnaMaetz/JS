@@ -1,0 +1,7 @@
+import cube from './numbers1';
+
+export { pow2 as pow, sum2 as sum, sub2 as sub } from './numbers2';
+export { default as multi } from './numbers2';
+export { default as sqrt } from './numbers3';
+
+export default cube;
