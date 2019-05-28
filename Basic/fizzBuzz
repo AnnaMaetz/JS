@@ -1,0 +1,9 @@
+const fizzBuzz = (begin, end) => {
+  for (let i = begin; i <= end; i += 1) {
+    const fizzPart = i % 3 === 0;
+    const buzzPart = i % 5 === 0;
+    const fizz = fizzPart ? 'Fizz' : '';
+    const buzz = buzzPart ? 'Buzz' : '';
+    console.log(fizzPart || buzzPart ? `${fizz}${buzz}` : i);
+  }
+};
