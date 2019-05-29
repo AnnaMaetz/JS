@@ -1,0 +1,13 @@
+const ackermann = (m, n) => {
+  if (m === 0) {
+    return n + 1;
+  }
+  if (m > 0 && n === 0) {
+    const newM = m - 1;
+    return ackermann(newM, 1);
+  }
+  const newM = m - 1;
+  const iterN = n - 1;
+  const newN = ackermann(m, iterN);
+  return ackermann(newM, newN);
+};
