@@ -1,0 +1,12 @@
+const isHappyTicket = (number) => {
+  const numberStr = String(number);
+  let leftPart = 0;
+  let rightPart = 0;
+  for (let i = 0; i < 3; i += 1) {
+    leftPart += Number(numberStr[i]);
+  }
+  for (let i = 3; i < 6; i += 1) {
+    rightPart += Number(numberStr[i]);
+  }
+  return leftPart === rightPart;
+};
