@@ -1,0 +1,16 @@
+const reverse = (str) => {
+  if (str.length === 0) {
+    return '';
+  }
+  const len = str.length - 1;
+  const emptyStr = '';
+  const reverseIter = (n, strReversed, strBase) => {
+    if (n === 0) {
+      return strReversed.concat(strBase[n]);
+    }
+    const nextN = n - 1;
+    const newStr = strReversed.concat(strBase[n]);
+    return reverseIter(nextN, newStr, strBase);
+  };
+  return reverseIter(len, emptyStr, str);
+};
