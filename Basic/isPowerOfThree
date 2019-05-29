@@ -1,0 +1,11 @@
+const isPowerOfThree = (n) => {
+  if (n === 0) { return false; }
+  let power = 0;
+  while (3 ** power <= n) {
+    if (3 ** power === n) {
+      return true;
+    }
+    power += 1;
+  }
+  return false;
+};
