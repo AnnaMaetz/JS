@@ -1,0 +1,27 @@
+const sumSquareDifference = (n) => {
+  const squareSum = (nSquareSum) => {
+    const begin = 0;
+    const squareSumIter = (acc, nSquareSumIter) => {
+      if (nSquareSumIter === 0) {
+        return acc * acc;
+      }
+      const accIter = acc + nSquareSumIter;
+      const nSquareSumI = nSquareSumIter - 1;
+      return squareSumIter(accIter, nSquareSumI);
+    };
+    return squareSumIter(begin, nSquareSum);
+  };
+  const sumSquare = (nSumSquare) => {
+    const begin = 0;
+    const sumSquareIter = (acc, nSumSquareIter) => {
+      if (nSumSquareIter === 0) {
+        return acc;
+      }
+      const accIter = acc + nSumSquareIter * nSumSquareIter;
+      const nSquareSumI = nSumSquareIter - 1;
+      return sumSquareIter(accIter, nSquareSumI);
+    };
+    return sumSquareIter(begin, nSumSquare);
+  };
+  return squareSum(n) - sumSquare(n);
+};
