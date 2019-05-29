@@ -1,0 +1,7 @@
+const formattedTime = (timeInMin) => {
+  const h = Math.floor(timeInMin / 60);
+  const min = timeInMin % 60;
+  const hStr = h < 10 ? '0'.concat(String(h)) : String(h);
+  const minStr = min < 10 ? '0'.concat(String(min)) : String(min);
+  return `${hStr}:${minStr}`;
+};
