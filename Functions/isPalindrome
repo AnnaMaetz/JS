@@ -1,0 +1,15 @@
+const isPalindrome = (str) => {
+  let len = str.length;
+    const isPalindromeIter = (strIter, lenIter) => {
+      if (lenIter < 2) {
+        return true;
+      }
+        if (strIter[0] === strIter[lenIter - 1]) {
+          const newStrIter = strIter.substring(1, lenIter);
+          const newlenIter = lenIter - 2;
+          return isPalindromeIter(newStrIter, newlenIter);
+        }
+        return false;
+    };
+  return isPalindromeIter(str, len);
+};
