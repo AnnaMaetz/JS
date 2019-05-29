@@ -1,0 +1,11 @@
+const substr = (str, start = 0, len = str.length) => {
+  len = len < 0 ? 1 : len;
+  len = len > str.length ? str.length : len;
+  len = len + start > str.length ? str.length - start : len;
+  start = start < 0 ? 0 : start;
+  let result = '';
+  for (let i = start; i < len + start; i += 1) {
+    result = result.concat(str[i]);
+  }
+  return result;
+};
