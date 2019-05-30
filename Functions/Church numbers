@@ -1,0 +1,12 @@
+export const Zero = () => z => z;
+export const Succ = f => x => y => f(x)(x(y));
+
+//*
+const two = Succ(Succ(Zero));
+                        f
+two(x => x + 1)(0); // 2
+          x     y
+
+const four = Succ(Succ(two));
+four(x => x + 1)(0);
+*//
