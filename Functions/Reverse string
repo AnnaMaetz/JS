@@ -1,0 +1,11 @@
+export default (str) => {
+  const lastIndex = str.length - 1;
+  const iter = (index, acc) => {
+    if (index > lastIndex) {
+      return acc;
+    }
+    const interPolis = acc.concat(str[lastIndex - index]);
+    return iter(index + 1, interPolis);
+  };
+  return iter(0, '');
+};
