@@ -1,0 +1,9 @@
+const apply = (n, f, a) => {
+  if (n === 0) {
+    return a;
+  }
+  if (n === 1) {
+    return f(a);
+  }
+  return f(apply(n - 1, f, a));
+};
