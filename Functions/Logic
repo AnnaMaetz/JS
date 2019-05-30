@@ -1,0 +1,18 @@
+export const True = one => () => one;
+export const False = () => two => two;
+export const If = func => func;
+
+//*
+import { If, True, False } from './logic';
+
+If(True)('one')('two');  // one
+If(False)('one')('two'); // two
+
+If(func)('one')('two'); // ?
+
+const ConditionFunction = If(True);
+ConditionFunction('one')('two'); // one
+
+const ConditionFunction = If(False);
+ConditionFunction('one')('two'); // two
+*//
