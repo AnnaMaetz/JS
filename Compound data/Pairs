@@ -1,3 +1,32 @@
 import { cons, car, cdr, toString } from 'hexlet-pairs'; // eslint-disable-line
 
 const sumOfPairs = (pair1, pair2) => cons(car(pair1) + car(pair2), cdr(pair1) + cdr(pair2));
+
+const reversePair = pair => cons(cdr(pair), car(pair));
+
+const findPrimitiveBox = (box) => {
+  const iter = (cell1, cell2, pair) => {
+    if (isPair(cell1)) {
+      return iter(car(cell1), cdr(cell1), cell1);
+    }
+    if (isPair(cell2)) {
+      return iter(car(cell2), cdr(cell2), cell2);
+    }
+    return pair;
+  };
+  return iter(car(box), cdr(box), box);
+};
+
+//*
+const pair = cons(
+  null,
+  cons('one', 'two'),
+);
+toString(findPrimitiveBox(pair)); // ('one', 'two')
+
+const pair2 = cons(
+  cons(null, cons(1, 5)),
+  null,
+);
+toString(findPrimitiveBox(pair2)); // (1, 5)
+*//
