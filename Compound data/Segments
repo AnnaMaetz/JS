@@ -18,3 +18,18 @@ export const midpointSegment = (segment) => {
   const y2 = getY(endSegment(segment));
   return makePoint((x1 + x2) / 2, (y1 + y2) / 2);
 };
+
+//*
+const segment = makeSegment(makePoint(1, 2), makePoint(-4, -2));
+console.log(segmentToString(segment)); // [(1, 2), (-4, -2)]
+
+const point1 = startSegment(segment);
+console.log(pointToString(point1)); // (1, 2)
+
+const point2 = endSegment(segment);
+console.log(pointToString(point2)); // (-4, -2)
+
+pointToString(startSegment(segment)) === pointToString(makePoint(1, 2)); // true
+
+pointToString(midpointSegment(segment)); // (-1.5, 0)
+*//
