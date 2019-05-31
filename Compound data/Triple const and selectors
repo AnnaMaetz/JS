@@ -1,0 +1,10 @@
+export const make = (a, b, c) => (message) => {
+  switch (message) {
+    case 'get1': return a;
+    case 'get2': return b;
+    case 'get3': return c;
+  }
+};
+export const get1 = pair => pair('get1');
+export const get2 = pair => pair('get2');
+export const get3 = pair => pair('get3');
