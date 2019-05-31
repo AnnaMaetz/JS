@@ -1,0 +1,9 @@
+const concat = a => b => c => a.concat(b).concat(c);
+
+//*
+initial:
+concat('a', 'bc', 'f'); // => abcf
+
+curried:
+concat('a')('bc')('f'); // => abcf
+*//
