@@ -1,0 +1,6 @@
+const compose = (f1, f2) => a => f1(f2(a));
+
+//*
+const f = compose(Math.sqrt, Math.abs);
+f(-4); // => 2
+*//
