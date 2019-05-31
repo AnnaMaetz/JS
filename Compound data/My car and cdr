@@ -1,0 +1,6 @@
+export const cons = (x, y) => f => f(x, y);
+
+const first = a => a;
+const second = (a, b) => b;
+export const car = pair => pair(first);
+export const cdr = pair => pair(second);
