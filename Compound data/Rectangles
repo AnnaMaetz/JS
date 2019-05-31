@@ -1,0 +1,40 @@
+
+import { makePoint, getX, getY, quadrant, toString as pointToString } from 'hexlet-points';
+import { cons, car, cdr, toString as pairToString } from 'hexlet-pairs';
+
+export const makeRectangle = (p, a, b) => cons(p, cons(a, b));
+export const getStartPoint = rectangle => car(rectangle);
+export const getWidth = rectangle => car(cdr(rectangle));
+export const getHeight = rectangle => cdr(cdr(rectangle));
+export const square = rectangle => getWidth(rectangle) * getHeight(rectangle);
+export const perimeter = rectangle => 2 * (getWidth(rectangle) + getHeight(rectangle));
+export const containsTheOrigin = (rectangle) => {
+  const p1 = getStartPoint(rectangle);
+  const p2 = makePoint(getX(p1) + getWidth(rectangle), getY(p1));
+  const p3 = makePoint(getX(p2), getY(p2) - getHeight(rectangle));
+  const p4 = makePoint(getX(p1), getY(p3));
+  return quadrant(p1) === 2 && quadrant(p2) === 1 && quadrant(p3) === 4 && quadrant(p4) === 3;
+};
+
+//*
+// p    5
+// -----------
+// |         |
+// |         | 4
+// |         |
+// -----------
+
+const p = makePoint(0, 1);
+const rectangle = makeRectangle(p, 5, 4);
+
+square(rectangle); // 20;
+
+perimeter(rectangle); // 18
+containsTheOrigin(rectangle); // false
+
+const rectangle02 = makeRectangle(makePoint(-4, 3), 5, 4);
+containsTheOrigin(rectangle02); // true
+
+containsTheOrigin(makeRectangle(makePoint(-4, 4), 5, 2)); // false
+containsTheOrigin(makeRectangle(makePoint(-4, 3), 2, 8)); // false
+*//
