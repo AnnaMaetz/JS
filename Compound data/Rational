@@ -1,0 +1,53 @@
+import { cons, car, cdr, toString as pairToString } from 'hexlet-pairs';
+
+export const make = (numer, denom) => cons(numer, denom);
+export const numer = rational => car(rational);
+export const denom = rational => cdr(rational);
+export const toString = (rational) => {
+  const m = numer(rational);
+  const n = denom(rational);
+  return `${m} / ${n}`;
+};
+export const isEqual = (r1, r2) => numer(r1) * denom(r2) === numer(r2) * denom(r1);
+export const add = (r1, r2) => {
+  const a = numer(r1);
+  const b = denom(r1);
+  const c = numer(r2);
+  const d = denom(r2);
+  return make(a * d + b * c, b * d);
+};
+export const sub = (r1, r2) => {
+  const a = numer(r1);
+  const b = denom(r1);
+  const c = numer(r2);
+  const d = denom(r2);
+  return make(a * d - b * c, b * d);
+};
+export const mul = (r1, r2) => {
+  const a = numer(r1);
+  const b = denom(r1);
+  const c = numer(r2);
+  const d = denom(r2);
+  return make(a * c, b * d);
+};
+export const div = (r1, r2) => {
+  const a = numer(r1);
+  const b = denom(r1);
+  const c = numer(r2);
+  const d = denom(r2);
+  return make(a * d, b * c);
+};
+
+//*
+
+a/b + c/d = (a * d + b * c) / (b * d)
+
+a/b - c/d = (a * d - b * c) / (b * d)
+
+a/b * c/d = (a * c) / (b * d)
+
+a/b / c/d = (a * d) / (b * c)
+
+a/b = c/d, если a * d = c * b
+
+*//
