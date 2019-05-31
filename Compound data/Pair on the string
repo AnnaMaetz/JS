@@ -1,0 +1,38 @@
+import length from './strings';
+
+export const cons = (s1, s2) => `${s1}\0${s2}`;
+
+const first = (str) => {
+  const len = length(str);
+  let result = '';
+  for (let i = 0; i < len; i += 1) {
+    if (str[i] !== '\0') {
+      result = `${result}${str[i]}`;
+    } else {
+      return result;
+    }
+  }
+  return result;
+};
+const second = (str) => {
+  const len = length(str);
+  let result = '';
+  for (let i = 0; i < len; i += 1) {
+    if (str[i] === '\0') {
+      for (let j = i + 1; j < len; j += 1) {
+        result = `${result}${str[j]}`;
+      }
+      return result;
+    }
+  }
+  return result;
+};
+
+export const car = pair => first(pair);
+export const cdr = pair => second(pair);
+
+//*
+const pair = cons('computer', 'science');   // => computer\0science
+car(pair); // computer
+cdr(pair); // science
+*//
