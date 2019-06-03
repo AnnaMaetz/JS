@@ -1,0 +1,49 @@
+import { l, cons, head, tail, isEmpty, toString as listToString } from 'hexlet-pairs-data';
+
+export const has = (list, value) => {
+  if (isEmpty(list)) {
+    return false;
+  }
+  if (head(list) === value) {
+    return true;
+  }
+  return has(tail(list), value);
+};
+
+export const reverse = (list) => {
+  const newList = l();
+  const reverseIter = (li, newLi) => {
+    if (isEmpty(li)) {
+      return newLi;
+    }
+    return reverseIter(tail(li), cons(head(li), newLi));
+  };
+  return reverseIter(list, newList);
+};
+
+export const concat = (list1, list2) => {
+  const reverseIter = (li) => {
+    if (isEmpty(li)) {
+      return list2;
+    }
+    return cons(head(li), reverseIter(tail(li)));
+  };
+  return reverseIter(list1);
+};
+
+//*
+const numbers = l(3, 4, 5, 8);
+has(numbers, 8); // true
+has(numbers, 0); // false
+
+
+const numbers = l(3, 4, 5);
+reverse(numbers); // (5, 4, 3)
+
+
+
+const numbers = l(3, 4, 5, 8);
+const numbers2 = l(3, 2, 9);
+concat(numbers, numbers2); // (3, 4, 5, 8, 3, 2, 9)
+
+*//
