@@ -1,0 +1,22 @@
+export const cons = (a, b) => (2 ** a) * (3 ** b);
+
+const factor = (base, n) => {
+  const iter = (nIter, count) => {
+    if (nIter % base !== 0) {
+      return count;
+    }
+    const c = count + 1;
+    const number = nIter / base;
+    return iter(number, c);
+  };
+  return iter(n, 0);
+};
+
+export const car = pair => factor(2, pair);
+export const cdr = pair => factor(3, pair);
+
+//*
+const pair = cons(5, 8);    // 2^5 * 3^8 = 209952
+car(pair); // 5
+cdr(pair); // 8
+*//
