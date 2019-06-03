@@ -1,0 +1,40 @@
+import { cons, car, cdr, toString as pairToString } from 'hexlet-pairs';
+
+import { l, isEmpty, head, tail, cons as consList, toString as listToString } from 'hexlet-pairs-data';
+
+export const make = () => l();
+
+export const node = (name, value) => f => f(name, value);
+
+export const getName = pair => pair(a => a);
+export const getValue = pair => pair((a, b) => b);
+
+export const append = (html, tag) => cons(tag, html);
+
+export const toString = (html) => {
+  if (isEmpty(html)) {
+    return '';
+  }
+  return `${toString(tail(html))}<${getName(head(html))}>${getValue(head(html))}</${getName(head(html))}>`;
+};
+
+//*
+const tag = node('div', 'what is love?');
+getName(tag); // => div
+getValue(tag); // => what is love?
+
+const dom1 = make();
+const dom2 = append(dom1, node('h1', 'hello, world'));
+const dom3 = append(dom2, node('h2', 'header2'));
+
+
+const tag = node('h3', 'header3');
+const dom = append(dom3, tag);
+
+toString(dom);
+// => <h1>hello, world</h1><h2>header2</h2><h3>header3</h3>
+
+toString(append(make(), node('p', 'this is Sparta!')));
+// <p>this is Sparta!</p>
+
+*//
