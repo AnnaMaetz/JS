@@ -1,0 +1,32 @@
+import {
+  node, getValue, is, map, filter, reduce,
+} from 'hexlet-html-tags';
+
+import { wc } from './utils';
+
+export const extractHeaders = (html) => {
+  const tagsH2 = filter(elem => is('h2', elem), html);
+  const textH2 = map(elem => node('p', getValue(elem)), tagsH2);
+  return textH2;
+};
+export const wordsCount = (tag, word, html) => {
+  const funcFilterTag = elem => is(tag, elem);
+  const funcMapValue = elem => getValue(elem);
+  const funcReduceWc = (elem, acc) => acc + wc(word, elem);
+  return reduce(funcReduceWc, 0, map(funcMapValue, filter(funcFilterTag, html)));
+};
+//*
+
+const html1 = append(make(), node('h2', 'header1'));
+const html2 = append(html1, node('h2', 'header2'));
+const html3 = append(html2, node('p', 'content'));
+// => <h2>header1</h2><h2>header2</h2><p>content</p>
+
+htmlToString(extractHeaders(html3));
+// => <p>header1</p><p>header2</p>
+
+wordsCount('h2', 'lisp', html4); // 3
+
+wc('what', 'what, what, who, what'); // 3
+wc('la', 'loli'); // 0
+ *//
