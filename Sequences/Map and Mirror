@@ -1,0 +1,37 @@
+import {
+  l, isEmpty, head, tail, cons, reverse,
+} from 'hexlet-pairs-data';
+
+import {
+  getName, getValue, node, is,
+} from 'hexlet-html-tags';
+
+import { reverse as reverseStr } from './strings';
+
+export const map = (func, tags) => {
+  const mapIter = (f, list, newList) => {
+    if (isEmpty(list)) {
+      return reverse(newList);
+    }
+    const li = tail(list);
+    const newElem = f(head(list));
+    return mapIter(f, li, cons(newElem, newList));
+  };
+  return mapIter(func, tags, l());
+};
+
+export const mirror = (tags) => {
+  const func = elem => node(getName(elem), reverseStr(getValue(elem)));
+  return map(func, tags);
+};
+
+//*
+const dom1 = make();
+const dom2 = append(dom1, node('h1', 'scheme'));
+const dom3 = append(dom2, node('p', 'is a lisp'));
+
+// <h1>emehcs</h1>
+// <p>psil a si</p>
+htmlToString(mirror(dom3));
+
+*//
