@@ -1,0 +1,30 @@
+import { getX, getY } from 'hexlet-points';
+import { isEmpty, head, tail } from 'hexlet-pairs-data';
+
+const calculatePolygonPerimeter = (listOfPoints) => {
+  const isPolygon = (list, acc) => {
+    if (isEmpty(list)) {
+      return acc >= 3;
+    }
+    return isPolygon(tail(list), acc + 1);
+  };
+  if (!isPolygon(listOfPoints, 0)) {
+    return null;
+  }
+
+  const iterPoints = (x1, y1, x2, y2, list, acc) => {
+    if (isEmpty(tail(list))) {
+      return acc + Math.sqrt(((x2 - x1) ** 2) + ((y2 - y1) ** 2));
+    }
+    const newAcc = acc + Math.sqrt(((x2 - x1) ** 2) + ((y2 - y1) ** 2));
+    const newX1 = x2;
+    const newY1 = y2;
+    const newX2 = isEmpty(tail(tail(list))) ? getX(head(listOfPoints)) : getX(head(tail(tail(list))));
+    const newY2 = isEmpty(tail(tail(list))) ? getY(head(listOfPoints)) : getY(head(tail(tail(list))));
+    const newList = tail(list);
+    return iterPoints(newX1, newY1, newX2, newY2, newList, newAcc);
+  };
+
+  return iterPoints(getX(head(listOfPoints)), getY(head(listOfPoints)), getX(head(tail(listOfPoints))), getY(head(tail(listOfPoints))), listOfPoints, 0);
+};
+export default calculatePolygonPerimeter;
