@@ -1,0 +1,34 @@
+import {
+  l, isEmpty, head, tail, cons, reverse,
+} from 'hexlet-pairs-data';
+
+import { getValue, is, map } from 'hexlet-html-tags';
+export const filter = (func, tags) => {
+  const filterIter = (f, list, newList) => {
+    if (isEmpty(list)) {
+      return reverse(newList);
+    }
+    if (f(head(list))) {
+      return filterIter(f, tail(list), cons(head(list), newList));
+    }
+    return filterIter(f, tail(list), newList);
+  };
+  return filterIter(func, tags, l());
+};
+
+export const quotes = (tags) => {
+  const funcFilter = elem => is('blockquote', elem);
+  const funcMap = elem => getValue(elem);
+  return map(funcMap, filter(funcFilter, tags));
+};
+
+//*
+const dom1 = make();
+const dom2 = append(dom1, node('h1', 'scheme'));
+const dom3 = append(dom2, node('p', 'is a lisp'));
+const dom4 = append(dom3, node('blockquote', 'live is life'));
+const dom5 = append(dom4, node('blockquote', 'i am sexy, and i know it'));
+
+listToString(quotes(dom5)); // ('i am sexy, and i know it', 'live is life');
+
+*//
