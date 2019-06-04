@@ -1,0 +1,33 @@
+import { isEmpty, head, tail } from 'hexlet-pairs-data';
+import { getValue, is } from 'hexlet-html-tags';
+
+export const reduce = (func, acc, elements) => {
+  const reduceIter = (elems, accum) => {
+    if (isEmpty(elems)) {
+      return accum;
+    }
+    const newAccum = func(head(elems), accum);
+    return reduceIter(tail(elems), newAccum);
+  };
+  return reduceIter(elements, acc);
+};
+
+export const emptyTagsCount = (type, tags) => {
+  const func = (elem, accum) => {
+    const newAccum = is(type, elem) && (getValue(elem) === '') ? accum + 1 : accum;
+    return newAccum;
+  };
+  const acc = 0;
+  return reduce(func, acc, tags);
+};
+
+//*
+const html1 = make();
+const html2 = append(html1, node('h1', 'scheme'));
+const html3 = append(html2, node('p', 'is a lisp'));
+const html4 = append(html3, node('blockquote', ''));
+const html5 = append(html4, node('blockquote', ''));
+const html6 = append(html5, node('blockquote', 'quote'));
+
+emptyTagsCount('blockquote', html6); // 2
+*//
