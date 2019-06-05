@@ -1,0 +1,15 @@
+import { l, isEmpty, head, tail, cons, toString as listToString } from 'hexlet-pairs-data';
+
+const take = (n, list) => {
+  if (isEmpty(list) || n === 0) {
+    return l();
+  }
+  return cons(head(list), take(n - 1, tail(list)));
+};
+export default take;
+
+//*
+take(3, l()); // ()
+take(3, l(1, 2)); // (1, 2)
+take(1, l(7, 2)); // (7)
+*//
