@@ -1,0 +1,23 @@
+import { l, isEmpty, head, tail, cons, reverse, toString as listToString } from 'hexlet-pairs-data';
+
+const zip = (list1, list2) => {
+  const iter = (l1, l2, l3) => {
+    if (isEmpty(l1) || isEmpty(l2)) {
+      return reverse(l3);
+    }
+    const newL3 = cons(l(head(l1), head(l2)), l3);
+    const newL1 = tail(l1);
+    const newL2 = tail(l2);
+    return iter(newL1, newL2, newL3);
+  };
+  return iter(list1, list2, l());
+};
+export default zip;
+
+//*
+const list1 = l(1, 5, 3, 8, 9);
+const list2 = l(2, 3, 2, 1);
+
+//  ((1, 2), (5, 3), (3, 2), (8, 1))
+const result = zip(list1, list2);
+*//
