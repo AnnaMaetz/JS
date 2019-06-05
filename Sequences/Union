@@ -1,0 +1,19 @@
+import { l, isEmpty, cons, reduce, has, reverse, toString as listToString } from 'hexlet-pairs-data';
+
+const union = (list1, list2) => {
+  const iter = (li1, li2, acc) => {
+    const func = (elem, a) => has(a, elem) ? a : cons(elem, a);
+    const acc1 = reduce(func, acc, li1);
+    return reduce(func, acc1, li2);
+  };
+  return reverse(iter(list1, list2, l()));
+};
+export default union;
+
+//*
+const list1 = l(2, 3, 2, 1, 7);
+const list2 = l(1, 5, 3, 5, 8, 9);
+
+const result = union(list1, list2);
+// (2, 3, 1, 7, 5, 8, 9)
+*//
