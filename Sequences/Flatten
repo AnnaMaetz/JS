@@ -1,0 +1,17 @@
+import { l, reverse, toString as listToString, isList, cons, reduce } from 'hexlet-pairs-data'; // eslint-disable-line
+
+const flatten = (list) => {
+  const iterFlatten = (li, newLi) => {
+    const func = (elem, acc) => (isList(elem)) ? iterFlatten(elem, acc) : cons(elem, acc);
+    return reduce(func, newLi, li);
+  };
+  return reverse(iterFlatten(list, l()));
+};
+export default flatten;
+
+//*
+const list = l(1, 2, l(3, 5), l(l(4, 3), 2));
+
+// (1, 2, 3, 5, 4, 3, 2)
+flatten(list);
+*//
