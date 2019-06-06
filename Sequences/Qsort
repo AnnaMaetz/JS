@@ -1,0 +1,51 @@
+import { l, isEmpty, head, tail, cons, concat, filter, toString as listToString } from 'hexlet-pairs-data';
+
+const sort = (list) => {
+  if (isEmpty(list)) {
+    return l();
+  }
+
+  const max = (li, elem) => {
+    if (tail(li) === null) {
+      return elem;
+    }
+    let newElem;
+    if (head(li) < head(tail(li))) {
+      newElem = head(tail(li));
+    } else {
+      newElem = elem;
+    }
+    return max(tail(li), newElem);
+  };
+
+  const comparison = (base, li) => {
+    const funcSmaller = elem => elem < base;
+    const newSmaller = filter(funcSmaller, li);
+    const funcLarger = elem => elem >= base;
+    const newLarger = filter(funcLarger, li);
+    let sm;
+    let lr;
+    if (isEmpty(newSmaller) || tail(newSmaller) === null || listToString(newSmaller) === listToString(li)) {
+      sm = newSmaller;
+    } else {
+      sm = comparison(max(newSmaller, head(newSmaller)), newSmaller);
+    }
+    if (isEmpty(newLarger) || tail(newLarger) === null || listToString(newLarger) === listToString(li)) {
+      lr = newLarger;
+    } else {
+      lr = comparison(max(newLarger, head(newLarger)), newLarger);
+    }
+    return concat(sm, lr);
+  };
+  
+  //*
+  sort(l(3, 3, 0, -1, 0, 4, -5));
+// (-5, -1, 0, 0, 3, 3, 4)
+
+sort(l(5, -3, 2, 10, 4, 4, 5));
+// (-3, 2, 4, 4, 5, 5, 10)
+*//
+
+  return comparison(max(list, head(list)), list);
+};
+export default sort;
