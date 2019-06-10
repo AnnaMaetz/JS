@@ -4,7 +4,7 @@ import { cons as consList, l, random, head, reverse, toString as listToString } 
 const run = (player1, player2, cards, customRandom) => {
   const iter = (health1, name1, health2, name2, order, log) => {
     if (health1 <= 0) {
-      return consList(cons(car(head(log)), `${name1} был убит`), log);
+      return consList(cons(car(head(log)), `${name1} killed`), log);
     }
 
     const card = customRandom(cards);
@@ -13,8 +13,7 @@ const run = (player1, player2, cards, customRandom) => {
     const damage = cdr(card)(health2);
     const newHealth = health2 - damage;
 
-    const message = `Игрок '${name1}' применил '${cardName}'
-      против '${name2}' и нанес урон '${damage}'`;
+    const message = `Player '${name1}' applied '${cardName}' vs '${name2}' and caused damage '${damage}'`;
     let stats;
     if (order === 1) {
       stats = cons(cons(health1, newHealth), message);
@@ -26,7 +25,7 @@ const run = (player1, player2, cards, customRandom) => {
   };
 
   const startHealth = 10;
-  const logItem = cons(cons(startHealth, startHealth), 'Начинаем бой!');
+  const logItem = cons(cons(startHealth, startHealth), 'Start game!');
   return reverse(iter(startHealth, player1, startHealth, player2, 1, l(logItem)));
 };
 
