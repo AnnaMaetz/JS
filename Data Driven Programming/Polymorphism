@@ -1,0 +1,33 @@
+//extract.js
+import { map } from 'hexlet-pairs-data';
+import { getAttribute, getName } from './tags';
+
+// BEGIN (write your solution here)
+const extract = (list) => {
+  const tag = {
+    link: 'href',
+    a: 'href',
+    img: 'src',
+  };
+  const link = (elem) => {
+    return getAttribute(tag[getName(elem)], elem);
+  };
+  return map(link, list);
+};
+export default extract;
+// END
+
+//tags.js
+export const make = (name, attributes = {}) => ({ name, attributes });
+export const getAttribute = (attrName, tag) => tag.attributes[attrName];
+export const getName = tag => tag.name;
+
+//*
+const tags = l(
+  make('a', { href: '/about' }),
+  make('img', { src: '/avatar.jpeg' }),
+  make('link', { href: '/favicon.ico' }),
+);
+
+extract(tags); // => ('/about', '/avatar.jpeg', '/favicon.ico')
+*//
