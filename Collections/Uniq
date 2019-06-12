@@ -1,0 +1,9 @@
+const uniq = (array) => {
+  const uniqIter = (acc, value) => acc.includes(value) ? acc : acc.concat(value);
+  return array.reduce(uniqIter, []);
+};
+export default uniq;
+
+//*
+uniq([2, 1, 2, 3]); // [2, 1, 3]
+*//
