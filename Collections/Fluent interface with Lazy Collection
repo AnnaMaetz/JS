@@ -1,0 +1,51 @@
+class Enumerable {
+  // BEGIN (write your solution here)
+  constructor(collection, operations) {
+    this.collection = collection;
+    this.operations = operations || [];
+  }
+
+  select(fn) {
+    const newOps = this.operations.slice();
+    newOps.push(coll => coll.map(fn));
+    return new Enumerable(this.collection.slice(), newOps);
+  }
+
+  orderBy(fn, direction = 'asc') {
+    const compare = (a, b) => {
+      if (fn(a) < fn(b)) {
+        if (direction === 'asc') {
+          return -1;
+        }
+        if (direction === 'desc') {
+          return 1;
+        }
+      }
+      if (fn(a) > fn(b)) {
+        if (direction === 'asc') {
+          return 1;
+        }
+        if (direction === 'desc') {
+          return -1;
+        }
+      }
+      return 0;
+    };
+    const newOps = this.operations.slice();
+    newOps.push(coll => coll.slice().sort(compare));
+    return new Enumerable(this.collection.slice(), newOps);
+  }
+
+  where(fn) {
+    const newOps = this.operations.slice();
+    newOps.push(coll => coll.filter(fn));
+    return new Enumerable(this.collection.slice(), newOps);
+  }
+
+  toArray() {
+    const toArrayIter = (col, f) => f(col);
+    return this.operations.reduce(toArrayIter, this.collection);
+  }
+}
+
+export default Enumerable;
