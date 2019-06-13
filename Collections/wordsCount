@@ -1,0 +1,22 @@
+const wordsCount = (words, stopWords) => {
+  const low = elem => elem.toLowerCase();
+  const wordsLow = words.map(low);
+
+  const checkStopWords = elem => !stopWords.includes(elem);
+  const wordsFiltered = wordsLow.filter(checkStopWords);
+
+  const wordsCountIter = (acc, elem) => {
+    if (acc.has(elem)) {
+      return acc.set(elem, acc.get(elem) + 1);
+    }
+    return acc.set(elem, 1);
+  };
+  return wordsFiltered.reduce(wordsCountIter, new Map());
+};
+export default wordsCount;
+
+//*
+const stopWords = ['and', 'or', 'a', 'the', ''];
+const words = ['HellO', 'h', 'And', 'heLlo', '', 'AND', 'DOG', 'oR', 'cat', 'HELLO', 'caT'];
+wordsCount(words, stopWords); // [['hello', 3], ['h', 1], ['dog', 1], ['cat', 2]]
+*//
