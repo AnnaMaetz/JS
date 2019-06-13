@@ -69,4 +69,4 @@ const result = coll.orderBy(car => car.year, 'desc')
 
 assert.deepEqual(result.toArray(), ['m5', 'm4']);
 
-*/
+*//
