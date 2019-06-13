@@ -1,0 +1,16 @@
+const difference = (set1, set2) => {
+  const newSet = new Set();
+  const differenceIter = (value) => {
+    if (!set2.has(value)) {
+      newSet.add(value);
+    }
+  };
+  set1.forEach(differenceIter);
+  return newSet;
+};
+export default difference;
+
+//*
+difference(new Set([2, 1]), new Set([2, 3]));
+// → [1]
+*//
