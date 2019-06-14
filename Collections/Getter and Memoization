@@ -42,11 +42,11 @@ class Enumerable {
       this.memo = this.operations.reduce((acc, func) => func(acc), this.collection);
     }
     return this.memo.slice();
-  };
+  }
 
   get length() {
     return this.toArray().length;
-  };
+  }
   // END
 }
 
