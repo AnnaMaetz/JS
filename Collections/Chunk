@@ -1,0 +1,25 @@
+const chunk = (arr, n) => {
+  const chunkIter = (acc, value) => {
+    if (acc.length === 0) {
+      acc.push([value]);
+    } else {
+      if (acc[acc.length - 1].length === n) {
+        acc.push([value]);
+      } else {
+        acc[acc.length - 1].push(value);
+      }
+    }
+    return acc;
+  };
+
+  return arr.reduce(chunkIter, []);
+};
+export default chunk;
+
+//*
+chunk(['a', 'b', 'c', 'd'], 2);
+// → [['a', 'b'], ['c', 'd']]
+
+chunk(['a', 'b', 'c', 'd'], 3);
+// → [['a', 'b', 'c'], ['d']]
+*//
