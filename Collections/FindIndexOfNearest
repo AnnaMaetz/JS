@@ -1,0 +1,21 @@
+const findIndexOfNearest = (arr, n) => {
+  if (arr.length === 0) {
+    return null;
+  }
+  const maped = arr.map(value => Math.abs(value - n));
+  const func = (acc, value, index) => {
+    if (maped[acc] > value) {
+      return index;
+    }
+    return acc;
+  };
+  return maped.reduce(func, 0);
+};
+export default findIndexOfNearest;
+
+//*
+findIndexOfNearest([], 2);              // null
+findIndexOfNearest([15, 10, 3, 4], 0);  // 2
+findIndexOfNearest([7, 5, 3, 2], 4);    // 1
+findIndexOfNearest([7, 5, 4, 4, 3], 4); // 2
+*//
