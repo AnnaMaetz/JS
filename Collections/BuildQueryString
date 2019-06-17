@@ -1,0 +1,13 @@
+const buildQueryString = (params) => {
+  const arr = [];
+  const buildArr = key => arr.push(`${key}=${params[key]}`);
+  Object.keys(params).forEach(buildArr);
+  const sortedArr = arr.slice().sort();
+  return sortedArr.join('&');
+};
+export default buildQueryString;
+
+//*
+bqs({ per: 10, page: 1 });
+// page=1&per=10
+*//
