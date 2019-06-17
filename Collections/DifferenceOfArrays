@@ -1,0 +1,10 @@
+const difference = (arr1, arr2) => {
+  const set = new Set(arr2);
+  return arr1.filter(value => !set.has(value));
+};
+export default difference;
+
+//*
+difference([2, 1], [2, 3]);
+// → [1]
+*//
