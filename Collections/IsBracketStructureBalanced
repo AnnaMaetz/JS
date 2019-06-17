@@ -1,0 +1,41 @@
+const isBracketStructureBalanced = (str) => {
+  if (str === '') {
+    return true;
+  }
+  const arr = str.split('');
+  const brackets = new Map([
+    ['(', ')'],
+    ['[', ']'],
+    ['{', '}'],
+    ['<', '>'],
+  ]);
+
+  const balanceIter = (acc, value) => {
+    if (acc === false) {
+      return acc;
+    }
+
+    if (brackets.has(value)) {
+      acc.push(brackets.get(value));
+    } else if (acc[acc.length - 1] === value) {
+      acc.pop();
+    } else {
+      return false;
+    }
+
+    return acc;
+  };
+  const balanced = arr.reduce(balanceIter, []);
+
+  if (balanced) {
+    return balanced.length === 0;
+  }
+
+  return false;
+};
+export default isBracketStructureBalanced;
+
+//*
+isBracketStructureBalanced('[()]');  // true
+isBracketStructureBalanced('{<>}}'); // false
+*//
