@@ -1,0 +1,34 @@
+const enlargeArrayImage = (array) => {
+  const enlargeArrayImageVertical = (acc, value) => {
+    const enlargeArrayImageHorizon = (acc2, value2) => [...acc2, value2, value2];
+    const newValue = value.reduce(enlargeArrayImageHorizon, []);
+    return [...acc, newValue, newValue];
+  };
+  return array.reduce(enlargeArrayImageVertical, []);
+};
+export default enlargeArrayImage;
+
+//*
+
+const arr = [
+  ['*', '*', '*', '*'],
+  ['*', ' ', ' ', '*'],
+  ['*', ' ', ' ', '*'],
+  ['*', '*', '*', '*'],
+];
+// ****
+// *  *
+// *  *
+// ****
+
+enlargeArrayImage(arr);
+// ********
+// ********
+// **    **
+// **    **
+// **    **
+// **    **
+// ********
+// ********
+
+*//
