@@ -1,0 +1,42 @@
+import { eachDay, format } from 'date-fns';
+
+const normalizeData = (data, beginDate, endDate) => {
+  const dataTimeArr = eachDay(beginDate, endDate);
+  const dataArr = dataTimeArr.map(elem => format(elem, 'DD.MM.YYYY'));
+  const normalizeDataIter = (elem) => {
+    const d = elem;
+    const objArr = data.filter(el => el.date === d);
+    let v;
+    if (objArr.length > 0) {
+      v = objArr[0].value;
+    } else {
+      v = 0;
+    }
+    return ({ value: v, date: d });
+  };
+  return dataArr.map(normalizeDataIter);
+};
+export default normalizeData;
+
+//*
+const data = [
+  { value: 14, date: '02.08.2018' },
+  { value: 43, date: '03.08.2018' },
+  { value: 38, date: '05.08.2018' },
+];
+
+const begin = '2018-08-01';
+const end = '2018-08-06';
+
+const result = normalizeData(data, begin, end);
+
+console.log(result);
+// OUTPUT
+[ { value: 0, date: '01.08.2018' },
+  { value: 14, date: '02.08.2018' },
+  { value: 43, date: '03.08.2018' },
+  { value: 0, date: '04.08.2018' },
+  { value: 38, date: '05.08.2018' },
+  { value: 0, date: '06.08.2018' } ]
+  
+  *//
