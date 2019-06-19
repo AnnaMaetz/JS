@@ -1,0 +1,43 @@
+import { reduce } from 'hexlet-immutable-fs-trees';
+
+const du = (root) => {
+  const calculateFilesSize = tree => reduce((acc, node) => (node.type === 'file' ? acc + node.meta.size : acc), tree, 0);
+  const result = root.children.map(n => [n.name, calculateFilesSize(n)]);
+  const compare = (a, b) => {
+    if (a[1] < b[1]) {
+      return 1;
+    }
+    if (a[1] > b[1]) {
+      return -1;
+    }
+    return 0;
+  };
+  return result.sort(compare);
+};
+export default du;
+
+//*
+const tree = mkdir('/', [
+  mkdir('etc', [
+    mkdir('apache'),
+    mkdir('nginx', [
+      mkfile('nginx.conf', { size: 800 }),
+    ]),
+    mkdir('consul', [
+      mkfile('config.json', { size: 1200 }),
+      mkfile('data', { size: 8200 }),
+      mkfile('raft', { size: 80 }),
+    ]),
+  ]),
+  mkfile('hosts', { size: 3500 }),
+  mkfile('resolve', { size: 1000 }),
+]);
+
+du(tree);
+// [
+//   ['etc', 10280],
+//   ['hosts', 3500],
+//   ['resolve', 1000],
+// ]
+
+*//
