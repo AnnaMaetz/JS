@@ -1,0 +1,21 @@
+const reduce = (func, tree, acc) => {
+  const newAcc = func(acc, tree);
+  if (tree.type === 'file') {
+    return newAcc;
+  }
+  return tree.children.reduce((iAcc, n) => reduce(func, n, iAcc), newAcc);
+};
+export default reduce;
+
+//*
+const tree = mkdir('/', [
+  mkdir('etc', [
+    mkdir('nginx'),
+    mkdir('consul', [
+      mkfile('config.json'),
+    ]),
+  ]),
+  mkfile('hosts'),
+]);
+reduce((acc, n) => acc + 1, tree, 0); // => 6
+*//
