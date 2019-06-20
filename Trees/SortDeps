@@ -1,0 +1,33 @@
+const sortDeps = (list) => {
+  const arr = [];
+  const buildArr = (key) => {
+    if (!list[key] || list[key].length === 0) {
+      if (!arr.includes(key)) {
+        arr.push(key);
+      }
+    } else {
+      list[key].forEach(buildArr);
+      if (!arr.includes(key)) {
+        arr.push(key);
+      }
+    }
+  };
+  Object.keys(list).forEach(buildArr);
+  return arr;
+};
+export default sortDeps;
+
+//*
+
+const deps1 = {
+  mongo: [],
+  tzinfo: ['thread_safe'],
+  uglifier: ['execjs'],
+  execjs: ['thread_safe', 'json'],
+  redis: [],
+};
+
+console.log(sortDeps(deps1));
+// => ['mongo', 'thread_safe', 'tzinfo', 'json', 'execjs', 'uglifier', 'redis'];
+
+*//
