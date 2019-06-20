@@ -1,0 +1,50 @@
+const itinerary = (tree, start, end) => {
+  const iter = (n, search, p, acc) => {
+    const [city, children] = n;
+    if (city === search) {
+      return [...p, city];
+    }
+    if (!children) {
+      return acc;
+    }
+    return children.reduce((cAcc, nn) => iter(nn, search, [...p, city], cAcc), acc);
+  };
+  const arr1 = iter(tree, start, [], []);
+  const arr2 = iter(tree, end, [], []);
+  const interArr = _.intersection(arr1, arr2);
+  const interStation = interArr[interArr.length - 1];
+  const arr1DifRev = _.reverse(_.difference(arr1, arr2));
+  const arr2Dif = _.difference(arr2, arr1);
+  return _.concat(arr1DifRev, [interStation], arr2Dif);
+};
+export default itinerary;
+
+//*
+const tree = ['Moscow', [
+  ['Smolensk'],
+  ['Yaroslavl'],
+  ['Voronezh', [
+    ['Liski'],
+    ['Boguchar'],
+    ['Kursk', [
+      ['Belgorod', [
+        ['Borisovka'],
+      ]],
+      ['Kurchatov'],
+    ]],
+  ]],
+  ['Ivanovo', [
+    ['Kostroma'], ['Kineshma'],
+  ]],
+  ['Vladimir'],
+  ['Tver', [
+    ['Klin'], ['Dubna'], ['Rzhev'],
+  ]],
+]];
+
+itinerary(tree, 'Dubna', 'Kostroma');
+// => ['Dubna', 'Tver', 'Moscow', 'Ivanovo', 'Kostroma']
+
+itinerary(tree, 'Borisovka', 'Kurchatov');
+// => ['Borisovka', 'Belgorod', 'Kursk', 'Kurchatov']
+*//
