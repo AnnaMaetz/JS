@@ -1,0 +1,22 @@
+const convert = (arr) => {
+  const iter = (acc, [key, value]) => {
+    if (value instanceof Array) {
+      return { ...acc, [key]: value.reduce(iter, {}) };
+    }
+    return { ...acc, [key]: value };
+  };
+  return arr.reduce(iter, {});
+};
+export default convert;
+
+//*
+convert([]); // => {}
+convert([['key', 'value']]); // { key: 'value' }
+convert([['key', 'value'], ['key2', 'value2']]); // { key: 'value', key2: 'value2' }
+
+convert([
+  ['key', [['key2', 'anotherValue']]],
+  ['key2', 'value2']
+]);
+// { key: { key2: 'anotherValue' }, key2: 'value2' }
+*//
