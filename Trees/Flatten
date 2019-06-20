@@ -1,0 +1,17 @@
+const flatten = (arr) => {
+  const func = (acc, elem) => {
+    if (!Array.isArray(elem)) {
+      return [...acc, elem];
+    }
+    return [...acc, ...elem.reduce(func, [])];
+  };
+  return arr.reduce(func, []);
+};
+export default flatten;
+
+//*
+const list = [1, 2, [3, 5], [[4, 3], 2]];
+
+// [1, 2, 3, 5, 4, 3, 2]
+flatten(list);
+*//
