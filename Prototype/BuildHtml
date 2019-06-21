@@ -1,0 +1,78 @@
+const buildHtml = (arr) => {
+  class Tag {
+    constructor(array) {
+      this.array = array;
+    }
+
+    tagName() {
+      return `<${this.array[0]}${this.attribute()}>${this.body()}${this.children()}</${this.array[0]}>`;
+    }
+
+    attribute() {
+      if (!(this.array[1] instanceof Array) && this.array[1] instanceof Object) {
+        const func = (acc, key) => `${acc} ${key}="${this.array[1][key]}"`;
+        return Object.keys(this.array[1]).reduce(func, '');
+      }
+      return '';
+    }
+
+    body() {
+      if (typeof this.array[1] === 'string') {
+        return `${this.array[1]}`;
+      }
+      if (typeof this.array[2] === 'string') {
+        return `${this.array[2]}`;
+      }
+      return '';
+    }
+
+    children() {
+      let newArr;
+      if (this.array[1] instanceof Array) {
+        [, newArr] = this.array;
+      } else if (this.array[2] instanceof Array) {
+        [, , newArr] = this.array;
+      } else if (this.array[3] instanceof Array) {
+        [, , , newArr] = this.array;
+      } else {
+        return '';
+      }
+      const func = (acc, elem) => {
+        const nTag = new Tag(elem);
+        return `${acc}${nTag.tagName()}`;
+      };
+
+      return newArr.reduce(func, '');
+    }
+  }
+
+  const newTag = new Tag(arr);
+  return newTag.tagName();
+};
+
+//*
+const data = ['html', [
+  ['meta', [
+    ['title', 'hello, hexlet!'],
+  ]],
+  ['body', { class: 'container' }, [
+    ['h1', { class: 'header' }, 'html builder example'],
+    ['div', [
+      ['span', 'span text2'],
+      ['span', 'span text3'],
+    ]],
+  ]],
+]];
+
+buildHtml(data);
+<html>
+  <meta><title>hello, hexlet!</title></meta>
+  <body class="container">
+    <h1 class="header">html builder example</h1>
+    <div>
+      <span>span text2</span>
+      <span>span text3</span>
+    </div>
+  </body>
+</html>
+*//
