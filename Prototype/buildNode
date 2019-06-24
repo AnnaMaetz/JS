@@ -69,7 +69,6 @@ class SingleTag {
   }
 
   toString() {
-    const buildAttrString = attrs => Object.keys(attrs).map(key => ` ${key}="${attrs[key]}"`).join('');
     return `<${this.name}${this.getAttributesAsLine()}>`;
   }
 
