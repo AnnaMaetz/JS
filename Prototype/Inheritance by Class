@@ -1,0 +1,43 @@
+//Node.js
+class Node {
+  constructor(name, attributes) {
+    this.name = name;
+    this.attributes = attributes;
+  }
+
+  getAttributesAsLine() {
+    return Object.entries(this.attributes)
+      .map(([key, value]) => ` ${key}="${value}"`)
+      .join('');
+  }
+}
+export default Node;
+
+//SingleTag.js
+import Node from './Node';
+
+class SingleTag extends Node {
+  toString() {
+    return `<${this.name}${this.getAttributesAsLine()}>`;
+  }
+}
+
+export default SingleTag;
+
+//PairedTag.js
+import Node from './Node';
+
+class PairedTag extends Node {
+  constructor(name, attributes, body, children) {
+    super(name, attributes);
+    this.body = body;
+    this.children = children;
+  }
+
+  toString() {
+    const value = this.children.length > 0 ? this.children.join('') : this.body;
+    return `<${this.name}${this.getAttributesAsLine()}>${value}</${this.name}>`;
+  }
+}
+
+export default PairedTag;
