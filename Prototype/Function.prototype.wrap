@@ -1,0 +1,19 @@
+Function.prototype.wrap = function wrap(func) {
+  const self = this;
+  return function (yourName, myName) {
+    return func(self, yourName, myName);
+  };
+};
+
+//*
+function speak(name) {
+   return `Hello ${name}`;
+}
+
+const newSpeak = speak.wrap((original, yourName, myName) => {
+  const greeting = original(yourName);
+  return `${greeting}, my name is ${myName}`;
+});
+
+newSpeak('Mary', 'Kate'); // Hello Mary, my name is Kate
+*//
