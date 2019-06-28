@@ -1,0 +1,25 @@
+Object.prototype.hash = function hash(str) {
+  const arr = str.split('.');
+  const obj = this;
+  return arr.reduce((acc, item) =>
+    (acc === undefined ? acc : acc[item]), obj);
+};
+
+//*
+const obj = {
+  person: {
+    name: 'joe',
+    history: {
+      hometown: 'bratislava',
+      bio: {
+        funFact: 'I like fishing.',
+      },
+    },
+  },
+};
+
+obj.hash('car'); // undefined
+obj.hash('person.history.bio'); // { funFact: 'I like fishing.' }
+obj.hash('person.history.homeStreet'); // undefined
+obj.hash('person.animal.pet.needNoseAntEater'); // undefined
+*//
